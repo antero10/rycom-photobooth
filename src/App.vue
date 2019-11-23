@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <home msg="prueba"/>
+    <home />
   </div>
 </template>
 
