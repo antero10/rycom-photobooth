@@ -12,6 +12,11 @@
             <input class="input-form" type="text" placeholder="Company" />    
             <input class="input-form" type="text" placeholder="Title" />    
             <input class="input-form" type="text" placeholder="E-mail" />
+            <div class="container-checkbox">
+                <input type="checkbox" id="fruit1" name="fruit-1" value="Apple">
+                <label for="fruit1"></label>
+                <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
+            </div>
             <br>
             <button class="input-form button-form">Next</button>
         </div>
@@ -78,13 +83,63 @@ export default {
     .button-form {
         width: 35%;
         box-shadow: 1px 1px 4px 0 #000000c7;
-        margin-top: 10px;
+        margin-top: -22px;
         margin-bottom: 0;
     }
     .img-robot {
         float: left;
         flex: 0 0 50%;
         max-width: 50%;
-        height: 500px;
+        height: 442px;
+    }
+    input[type=checkbox] + label {
+        display: inline-flex;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    input[type=checkbox] + label:before {
+        content: "\2714";
+        border: 0.1em solid #e34d32;
+        border-radius: 0.2em;
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        padding-left: 0.2em;
+        padding-bottom: 0.3em;
+        margin-right: 0.2em;
+        vertical-align: bottom;
+        color: transparent;
+        -webkit-transition: .2s;
+        transition: .2s;
+        line-height: 1.8;
+        font-size: 28px;
+    }
+
+    input[type=checkbox]:checked + label:before {
+        background-color: #e24c32;
+        border-color: #e45332;
+        color: #fff;
+    }
+
+    input[type=checkbox]:disabled + label:before {
+        border-color: #aaa;
+    }
+
+    input[type=checkbox]:checked:disabled + label:before {
+        background-color: #bfb;
+        border-color: #bfb;
+    }
+    .text-checkBox {
+        display: inline-flex;
+        font-size: 24px;
+        position: relative;
+        top: -17px;
+        font-weight: bold;
     }
 </style>
