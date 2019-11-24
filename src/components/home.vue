@@ -27,7 +27,7 @@ export default {
     .container-cam {
         background-color: black;
         width: 50%;
-        height: 400px;
+        height: 600px;
         margin: 0 auto;
         box-shadow: 0 0 7px 0 #676767;
     }
@@ -42,7 +42,7 @@ export default {
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
         width: 15%;
-        height: 56px;
+        height: 100px;
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
