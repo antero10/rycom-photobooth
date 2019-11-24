@@ -34,7 +34,7 @@ export default {
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
         width: 15%;
-        height: 56px;
+        height: 98px;
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
@@ -55,7 +55,7 @@ export default {
         
     }
     .container-text-form p {
-        font-size: 34px;
+        font-size: 59px;
         font-weight: bold;
         text-align: left;
         padding-left: 30px;
@@ -63,22 +63,21 @@ export default {
     }
     .input-form {
         background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%);
-        border-radius: 30px;
+        border-radius: 38px;
         color: white;
         text-align: center;
         width: 100%;
-        height: 42px;
+        height: 75px;
         border: none;
         margin: 6px 0px;
-        font-size: 15px;
+        font-size: 24px;
     }
     .input-form::placeholder {
         color: white;
     }
     .button-form {
-        width: 34%;
+        width: 35%;
         box-shadow: 1px 1px 4px 0 #000000c7;
-        font-size: 15px;
         margin-top: 10px;
         margin-bottom: 0;
     }
@@ -86,6 +85,6 @@ export default {
         float: left;
         flex: 0 0 50%;
         max-width: 50%;
-        height: 300px;
+        height: 500px;
     }
 </style>
