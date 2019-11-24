@@ -137,9 +137,10 @@ export default {
     }
     .text-checkBox {
         display: inline-flex;
-        font-size: 24px;
+        font-size: 19px;
         position: relative;
         top: -17px;
         font-weight: bold;
+        text-align: left;
     }
 </style>
