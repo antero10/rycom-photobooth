@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <home msg="prueba"/>
+    <contact msg="prueba"/>
   </div>
 </template>
 
 <script>
-import home from './components/home.vue'
+//import home from './components/home.vue'
+import contact from './components/form.vue'
 
 export default {
   name: 'app',
   components: {
-    home
+    contact
   }
 }
 </script>
