@@ -1,5 +1,5 @@
-import Home from './components/home';
-import Message from './components/message';
+import Home from './components/Home';
+import Message from './components/Message';
 import Contact from './components/Contact';
 
 const routes = [

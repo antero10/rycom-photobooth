@@ -3,12 +3,13 @@
     <div class="hello">
       <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
       <div class="container-cam">
-          <video autoplay="true" id="videoElement"/>
+          <video ref="video" autoplay="true" id="videoElement"/>
           <div class="background-cam">
             
           </div>
       </div>
-      <button class="btn-return"></button>
+      <button class="btn-return" v-on:click="capture()"></button>
+      <canvas ref="canvas" id="canvas" width="640" height="480" style="display:none;"></canvas>
     </div>
 </div>
 </template>
@@ -19,13 +20,26 @@ export default {
   props: {
     msg: String
   },
+  data() {
+    return {
+        video: {},
+        canvas: {},
+        captures: []
+    }
+  },
   mounted() {
-    var video = document.querySelector("#videoElement");
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
+    this.video = this.$refs.video;
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+            this.video.srcObject = stream;
         });
+    }
+  },
+  methods: {
+    capture() {
+        this.canvas = this.$refs.canvas;
+        this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
+        this.captures.push(this.canvas.toDataURL("image/png"));
     }
   }
 }
