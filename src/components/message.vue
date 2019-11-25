@@ -8,7 +8,7 @@
             <p class="color-grey">YOU PICTURE HAS BEEN SENT TO YOUR EMAIL!</p>
             <p class="color-orange">THANK YOU FOR VISITING RYCOM´S SMART STATION</p>
         </div>
-        <div class="btn-return"></div>
+        <button class="btn-return"></button>
       </div>
   </div>
 </div>
@@ -66,12 +66,16 @@ export default {
     }
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
-        width: 15%;
-        height: 102px;
+        width: 213px;
+        height: 70px;
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
         margin-top: 40px;
         cursor: pointer;
+        border: none;
+    }
+    .btn-return:focus {
+        outline: none;
     }
 </style>
