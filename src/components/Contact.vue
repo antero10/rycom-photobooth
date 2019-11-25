@@ -21,7 +21,7 @@
             <button class="input-form button-form">Next</button>
         </div>
     </div>
-    <div class="btn-return"></div>
+    <button class="btn-return"></button>
     </div>
 </template>
 
@@ -38,13 +38,17 @@ export default {
 <style scoped>
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
-        width: 15%;
-        height: 98px;
+        width: 213px;
+        height: 70px;
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
+        margin-top: 40px;
         cursor: pointer;
-        margin-top: 10px;
+        border: none;
+    }
+    .btn-return:focus {
+        outline: none;
     }
     .container-form {
         width: 50%;

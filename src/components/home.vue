@@ -8,7 +8,7 @@
             
           </div>
       </div>
-      <div class="btn-return"></div>
+      <button class="btn-return"></button>
     </div>
 </div>
 </template>
@@ -64,13 +64,17 @@ export default {
       position: relative;
     }
     .btn-return {
-      background-image: url(../assets/Main_Menu_Button.png);
-      width: 15%;
-      height: 100px;
-      background-size: 100%;
-      background-repeat: no-repeat;
-      margin: 0 auto;
-      margin-top: 40px;
-      cursor: pointer;
+        background-image: url(../assets/Main_Menu_Button.png);
+        width: 213px;
+        height: 70px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        margin-top: 40px;
+        cursor: pointer;
+        border: none;
+    }
+    .btn-return:focus {
+        outline: none;
     }
 </style>
