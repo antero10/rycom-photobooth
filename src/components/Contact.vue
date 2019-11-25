@@ -21,7 +21,7 @@
             <button class="input-form button-form">Next</button>
         </div>
     </div>
-    <button class="btn-return"></button>
+    <button class="btn-return" v-on:click="submit()"></button>
     </div>
 </template>
 
@@ -30,6 +30,11 @@ export default {
   name: 'Contact',
   props: {
     msg: String
+  },
+  methods: {
+    submit() {
+      this.$router.push('/message');
+    }
   }
 }
 </script>
