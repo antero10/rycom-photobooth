@@ -1,11 +1,15 @@
 <template>
-  <div class="hello">
-    <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
-    <div class="container-cam">
-        <div class="background-cam"></div>
+<div class="app">
+    <div class="hello">
+      <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
+      <div class="container-cam">
+          <div class="background-cam">
+            <video autoplay="true" id="videoElement"/>
+          </div>
+      </div>
+      <div class="btn-return"></div>
     </div>
-    <div class="btn-return"></div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -13,6 +17,15 @@ export default {
   name: 'home',
   props: {
     msg: String
+  },
+  mounted() {
+    var video = document.querySelector("#videoElement");
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        });
+    }
   }
 }
 </script>

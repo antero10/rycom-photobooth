@@ -1,13 +1,17 @@
 <template>
-  <div class="hello">
-    <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
-    <div>
-        <div class="check-icon"></div>
-        <p class="color-grey">YOU PICTURE HAS BEEN SENT TO YOUR EMAIL!</p>
-        <p class="color-orange">THANK YOU FOR VISITING RYCOM´S SMART STATION</p>
-    </div>
-    <div class="btn-return"></div>
+<div class="app">
+  <div class="app">
+      <div class="hello">
+        <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
+        <div>
+            <div class="check-icon"></div>
+            <p class="color-grey">YOU PICTURE HAS BEEN SENT TO YOUR EMAIL!</p>
+            <p class="color-orange">THANK YOU FOR VISITING RYCOM´S SMART STATION</p>
+        </div>
+        <div class="btn-return"></div>
+      </div>
   </div>
+</div>
 </template>
 
 <script>
