@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    image: apache
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./dist/:/var/www/html
+    restart: always
+    ports:
+      - "8080:80"
