@@ -59,7 +59,7 @@ export default {
         outline: none;
     }
     .container-form {
-        width: 50%;
+        width: 80%;
         margin: 0 auto;
     }
     .container-form-inputs {
@@ -156,10 +156,14 @@ export default {
         top: -17px;
         font-weight: bold;
         text-align: left;
-        width: 625px;
+        width: 525px;
     }
     .container-center {
         display: table;
         margin: 0 auto;
+    }
+    .container-checkbox {
+        margin-top: 25px;
+        margin-bottom: 25px;
     }
 </style>
