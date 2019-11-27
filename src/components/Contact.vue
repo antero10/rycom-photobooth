@@ -68,8 +68,7 @@ export default {
     .container-text-form {
         float: left;
         flex: 0 0 50%;
-        max-width: 64%;
-        
+        width: calc(100% - 40%);
     }
     .container-text-form p {
         font-size: 59px;
@@ -104,6 +103,7 @@ export default {
         flex: 0 0 50%;
         max-width: 50%;
         height: 442px;
+        width: calc(100% - 60%);
     }
     input[type=checkbox] + label {
         display: inline-flex;
@@ -156,7 +156,7 @@ export default {
         top: -17px;
         font-weight: bold;
         text-align: left;
-        width: 525px;
+        width: 80%;
     }
     .container-center {
         display: table;
