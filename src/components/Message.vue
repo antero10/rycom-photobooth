@@ -8,7 +8,7 @@
             <p class="color-grey">YOU PICTURE HAS BEEN SENT TO YOUR EMAIL!</p>
             <p class="color-orange">THANK YOU FOR VISITING RYCOM´S SMART STATION</p>
         </div>
-        <button class="btn-return"></button>
+        <button class="btn-return" v-on:click="goCamera()"></button>
       </div>
   </div>
 </div>
@@ -19,6 +19,11 @@ export default {
   name: 'message',
   props: {
     msg: String
+  },
+  methods: {
+    goCamera() {
+      this.$router.push('/');
+    }
   }
 }
 </script>

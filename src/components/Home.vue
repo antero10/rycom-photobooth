@@ -3,16 +3,16 @@
     <div class="hello">
       <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
       <div class="container-cam">
-          <video v-if="canvas" ref="video" autoplay="true" id="videoElement"/>
-          <canvas v-if="!canvas" ref="canvas" id="canvas" width="640" height="480"></canvas>
+          <video ref="video" autoplay="true" id="videoElement"/>
+          <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
           <div class="background-cam">
             
           </div>
       </div>
-      <button class="btn-return m-top-30" v-on:click="capture()"></button> <br>
-      <button class="btn-return btn-img1" v-on:click="capture()"></button> <br>
-      <button class="btn-return btn-img2" v-on:click="capture()"></button> <br>
-
+      
+      <button v-if="cameraActive" class="btn-return btn-img3 m-top-30" v-on:click="capture()"></button> <br>
+      <button v-if="!cameraActive" class="btn-return btn-img2" v-on:click="retake()"></button> <br>
+      <button class="btn-return btn-img1" v-on:click="goMain()"></button> <br>
       <!--<button class="input-form button-form">text</button>-->
     </div>
 </div>
@@ -28,6 +28,7 @@ export default {
     return {
         video: {},
         canvas: {},
+        cameraActive: true,
         captures: []
     }
   },
@@ -44,6 +45,15 @@ export default {
         this.canvas = this.$refs.canvas;
         this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
         this.captures.push(this.canvas.toDataURL("image/png"));
+        this.cameraActive = false;
+    },
+    retake() {
+      this.canvas = this.$refs.canvas;
+      this.canvas.getContext("2d").clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.cameraActive = true;
+    },
+    goMain() {
+      this.$router.push('/contact');
     }
   }
 }
@@ -107,7 +117,10 @@ export default {
       background-image: url(../assets/Main_Menu_Button.png) !important;
     }
     .btn-img2 {
-      background-image: url(../assets/Main_Menu_Button.png) !important;
+      background-image: url(../assets/Retake_Photo_Button.png) !important;
+    }
+    .btn-img3 {
+      background-image: url(../assets/Take_Photo.png) !important;
     }
     .btn-return:focus {
       outline: none;

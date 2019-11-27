@@ -18,10 +18,10 @@
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
-            <button class="input-form button-form">Next</button>
+            <button class="input-form button-form" v-on:click="submit()">Next</button>
         </div>
     </div>
-    <button class="btn-return" v-on:click="submit()"></button>
+    <button class="btn-return"></button>
     </div>
 </template>
 
