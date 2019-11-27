@@ -110,6 +110,9 @@ export default {
         border: none;
         background-color: transparent;
     }
+    .btn-return:focus {
+        outline: none;
+    }
     .m-top-30 {
       margin-top: 30px;
     }

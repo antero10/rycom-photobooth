@@ -18,10 +18,10 @@
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
-            <button class="input-form button-form" v-on:click="camera()">Next</button>
+            <button class="input-form button-form container-center" v-on:click="camera()">Next</button>
         </div>
     </div>
-    <button class="btn-return"></button>
+    <button class="btn-return container-center"></button>
     </div>
 </template>
 
@@ -48,9 +48,12 @@ export default {
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
-        margin-top: 40px;
         cursor: pointer;
         border: none;
+        background-color: transparent;
+    }
+    .btn-return:focus {
+        outline: none;
     }
     .btn-return:focus {
         outline: none;
@@ -90,10 +93,11 @@ export default {
         color: white;
     }
     .button-form {
-        width: 35%;
-        box-shadow: 1px 1px 4px 0 #000000c7;
-        margin-top: -22px;
-        margin-bottom: 0;
+        width: 200px;
+        box-shadow: 4px 3px 8px 0 #000000c7;
+        margin-top: -22px !important;
+        margin-bottom: 10px !important;
+        height: 62px;
     }
     .img-robot {
         float: left;
@@ -106,6 +110,7 @@ export default {
         margin: 0.2em;
         cursor: pointer;
         padding: 0.2em;
+        padding-left: 60px;
     }
 
     input[type=checkbox] {
@@ -151,5 +156,10 @@ export default {
         top: -17px;
         font-weight: bold;
         text-align: left;
+        width: 625px;
+    }
+    .container-center {
+        display: table;
+        margin: 0 auto;
     }
 </style>
