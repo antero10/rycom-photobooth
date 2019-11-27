@@ -76,11 +76,16 @@ export default {
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
-        margin-top: 40px;
         cursor: pointer;
         border: none;
+        background-color: transparent;
+        margin-top: 35px;
     }
     .btn-return:focus {
         outline: none;
+    }
+    .container-checkbox {
+      margin-top: 25px;
+      margin-bottom: 25px;
     }
 </style>
