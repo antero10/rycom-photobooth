@@ -18,7 +18,7 @@
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
-            <button class="input-form button-form" v-on:click="submit()">Next</button>
+            <button class="input-form button-form" v-on:click="camera()">Next</button>
         </div>
     </div>
     <button class="btn-return"></button>
@@ -32,8 +32,8 @@ export default {
     msg: String
   },
   methods: {
-    submit() {
-      this.$router.push('/message');
+    camera() {
+      this.$router.push('/home');
     }
   }
 }

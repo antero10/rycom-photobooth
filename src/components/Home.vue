@@ -53,7 +53,7 @@ export default {
       this.cameraActive = true;
     },
     goMain() {
-      this.$router.push('/contact');
+      this.$router.push('/message');
     }
   }
 }

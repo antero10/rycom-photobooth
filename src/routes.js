@@ -3,8 +3,8 @@ import Message from './components/Message';
 import Contact from './components/Contact';
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/contact', component: Contact },
+  { path: '/', component: Contact },
+  { path: '/home', component: Home },
   { path: '/message', component: Message }
 ]
 
