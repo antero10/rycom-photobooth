@@ -21,7 +21,7 @@
             <button class="input-form button-form container-center" v-on:click="camera()">Next</button>
         </div>
     </div>
-    <button class="btn-return container-center"></button>
+    <button class="btn-return container-center" v-on:click="backToPage()"></button>
     </div>
 </template>
 
@@ -34,6 +34,10 @@ export default {
   methods: {
     camera() {
       this.$router.push('/home');
+    },
+    backToPage() {
+      console.log('asd');
+      window.location.href = 'http://bm3sk.bm3group.com';
     }
   }
 }
