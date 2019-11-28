@@ -8,13 +8,13 @@
             </div>
         </div>
         <div class="container-form container-form-inputs">
-            <input class="input-form" type="text" placeholder="Full Name" />    
-            <input class="input-form" type="text" placeholder="Company" />    
-            <input class="input-form" type="text" placeholder="Title" />    
-            <input class="input-form" type="text" placeholder="E-mail" />
+            <input class="input-form" id="Full_Name" :value="inputs['Full_Name']" @focus="onInputFocus" @input="onInputChange" placeholder="Full Name" />    
+            <input class="input-form" id="Company" :value="inputs['Company']" @focus="onInputFocus" @input="onInputChange" placeholder="Company" />    
+            <input class="input-form" id="Title" :value="inputs['Title']" @focus="onInputFocus" @input="onInputChange" placeholder="Title" />    
+            <input class="input-form" id="E_mail" :value="inputs['E_mail']" @focus="onInputFocus" @input="onInputChange" placeholder="E-mail" />
             <div class="container-checkbox">
-                <input type="checkbox" id="fruit1" name="fruit-1" value="Apple">
-                <label for="fruit1"></label>
+                <input type="checkbox" id="check" name="check" value="check">
+                <label for="check"></label>
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
@@ -22,18 +22,49 @@
         </div>
     </div>
     <button class="btn-return"></button>
+    <button class="btn-return container-center"></button>
+    <SimpleKeyboard
+      @onChange="onChange"
+      @onKeyPress="onKeyPress"
+      :input="inputs[inputName]"
+      :inputName="inputName"/>
     </div>
 </template>
 
 <script>
+import SimpleKeyboard from "./SimpleKeyboard";
 export default {
   name: 'Contact',
+  components: {
+    SimpleKeyboard
+  },
+  data: () => ({
+    inputs: {
+      Full_Name: "",
+      Company: "",
+      Title: "",
+      E_mail: ""
+    },
+    inputName: "Full_Name"
+  }),
   props: {
     msg: String
   },
   methods: {
     camera() {
       this.$router.push('/home');
+    },
+    onChange(input) {
+      this.inputs[this.inputName] = input;
+    },
+    onKeyPress(button) {
+      console.log("button", button);
+    },
+    onInputChange(input) {
+      this.inputs[input.target.id] = input.target.value;
+    },
+    onInputFocus(input) {
+      this.inputName = input.target.id;
     }
   }
 }
@@ -41,6 +72,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .simple-keyboard.hg-theme-default.hg-layout-default {
+        margin: 0 auto;
+        margin-top: 45px;
+    }
+    .simple-keyboard {
+        max-width: 850px;
+    }
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
         width: 213px;
