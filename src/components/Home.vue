@@ -72,8 +72,8 @@ export default {
     canvas#canvas {
       position: absolute;
       top: 25px;
-      left: 8px;
-      width: 798px;
+      left: 40px;
+      width: 728px;
       height: 549px;
       z-index: 0;
     }
