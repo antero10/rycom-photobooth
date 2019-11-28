@@ -8,35 +8,66 @@
             </div>
         </div>
         <div class="container-form container-form-inputs">
-            <input class="input-form" type="text" placeholder="Full Name" />    
-            <input class="input-form" type="text" placeholder="Company" />    
-            <input class="input-form" type="text" placeholder="Title" />    
-            <input class="input-form" type="text" placeholder="E-mail" />
+            <input class="input-form" id="Full_Name" :value="inputs['Full_Name']" @focus="onInputFocus" @input="onInputChange" placeholder="Full Name" />    
+            <input class="input-form" id="Company" :value="inputs['Company']" @focus="onInputFocus" @input="onInputChange" placeholder="Company" />    
+            <input class="input-form" id="Title" :value="inputs['Title']" @focus="onInputFocus" @input="onInputChange" placeholder="Title" />    
+            <input class="input-form" id="E_mail" :value="inputs['E_mail']" @focus="onInputFocus" @input="onInputChange" placeholder="E-mail" />
             <div class="container-checkbox">
-                <input type="checkbox" id="fruit1" name="fruit-1" value="Apple">
-                <label for="fruit1"></label>
+                <input type="checkbox" id="check" v-model='check' name="check" value="check">
+                <label for="check"></label>
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
-            <button class="input-form button-form container-center" v-on:click="camera()">Next</button>
+            <button class="input-form button-form container-center" :disabled='!isComplete' v-on:click="camera()">Next</button>
         </div>
     </div>
     <button class="btn-return container-center" v-on:click="backToPage()"></button>
+    <SimpleKeyboard
+      @onChange="onChange"
+      :input="inputs[inputName]"
+      :inputName="inputName"/>
     </div>
 </template>
 
 <script>
+import SimpleKeyboard from "./SimpleKeyboard";
 export default {
   name: 'Contact',
+  components: {
+    SimpleKeyboard
+  },
+  data: () => ({
+    inputs: {
+      Full_Name: "",
+      Company: "",
+      Title: "",
+      E_mail: "",
+    },
+    check: false,
+    inputName: "Full_Name"
+  }),
   props: {
     msg: String
+  },
+  computed: {
+    isComplete () {
+      return this.inputs['Full_Name'] && this.inputs['Company'] && this.inputs['Title'] && this.inputs['E_mail'] && this.check;
+    }
   },
   methods: {
     camera() {
       this.$router.push('/home');
     },
+    onChange(input) {
+      this.inputs[this.inputName] = input;
+    },
+    onInputChange(input) {
+      this.inputs[input.target.id] = input.target.value;
+    },
+    onInputFocus(input) {
+      this.inputName = input.target.id;
+    },
     backToPage() {
-      console.log('asd');
       window.location.href = 'http://bm3sk.bm3group.com';
     }
   }
@@ -45,6 +76,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .simple-keyboard.hg-theme-default.hg-layout-default {
+        margin: 0 auto;
+        margin-top: 45px;
+    }
+    .simple-keyboard {
+        max-width: 950px;
+    }
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
         width: 213px;
