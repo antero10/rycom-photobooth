@@ -13,19 +13,17 @@
             <input class="input-form" id="Title" :value="inputs['Title']" @focus="onInputFocus" @input="onInputChange" placeholder="Title" />    
             <input class="input-form" id="E_mail" :value="inputs['E_mail']" @focus="onInputFocus" @input="onInputChange" placeholder="E-mail" />
             <div class="container-checkbox">
-                <input type="checkbox" id="check" name="check" value="check">
+                <input type="checkbox" id="check" v-model='check' name="check" value="check">
                 <label for="check"></label>
                 <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
             </div>
             <br>
-            <button class="input-form button-form" v-on:click="camera()">Next</button>
+            <button class="input-form button-form container-center" :disabled='!isComplete' v-on:click="camera()">Next</button>
         </div>
     </div>
-    <button class="btn-return"></button>
-    <button class="btn-return container-center"></button>
+    <button class="btn-return container-center" v-on:click="backToPage()"></button>
     <SimpleKeyboard
       @onChange="onChange"
-      @onKeyPress="onKeyPress"
       :input="inputs[inputName]"
       :inputName="inputName"/>
     </div>
@@ -43,12 +41,18 @@ export default {
       Full_Name: "",
       Company: "",
       Title: "",
-      E_mail: ""
+      E_mail: "",
     },
+    check: false,
     inputName: "Full_Name"
   }),
   props: {
     msg: String
+  },
+  computed: {
+    isComplete () {
+      return this.inputs['Full_Name'] && this.inputs['Company'] && this.inputs['Title'] && this.inputs['E_mail'] && this.check;
+    }
   },
   methods: {
     camera() {
@@ -57,14 +61,14 @@ export default {
     onChange(input) {
       this.inputs[this.inputName] = input;
     },
-    onKeyPress(button) {
-      console.log("button", button);
-    },
     onInputChange(input) {
       this.inputs[input.target.id] = input.target.value;
     },
     onInputFocus(input) {
       this.inputName = input.target.id;
+    },
+    backToPage() {
+      window.location.href = 'http://bm3sk.bm3group.com';
     }
   }
 }
@@ -77,7 +81,7 @@ export default {
         margin-top: 45px;
     }
     .simple-keyboard {
-        max-width: 850px;
+        max-width: 950px;
     }
     .btn-return {
         background-image: url(../assets/Main_Menu_Button.png);
@@ -86,15 +90,18 @@ export default {
         background-size: 100%;
         background-repeat: no-repeat;
         margin: 0 auto;
-        margin-top: 40px;
         cursor: pointer;
         border: none;
+        background-color: transparent;
+    }
+    .btn-return:focus {
+        outline: none;
     }
     .btn-return:focus {
         outline: none;
     }
     .container-form {
-        width: 50%;
+        width: 80%;
         margin: 0 auto;
     }
     .container-form-inputs {
@@ -103,8 +110,7 @@ export default {
     .container-text-form {
         float: left;
         flex: 0 0 50%;
-        max-width: 64%;
-        
+        width: calc(100% - 40%);
     }
     .container-text-form p {
         font-size: 59px;
@@ -128,22 +134,25 @@ export default {
         color: white;
     }
     .button-form {
-        width: 35%;
-        box-shadow: 1px 1px 4px 0 #000000c7;
-        margin-top: -22px;
-        margin-bottom: 0;
+        width: 200px;
+        box-shadow: 4px 3px 8px 0 #000000c7;
+        margin-top: -22px !important;
+        margin-bottom: 10px !important;
+        height: 62px;
     }
     .img-robot {
         float: left;
         flex: 0 0 50%;
         max-width: 50%;
         height: 442px;
+        width: calc(100% - 60%);
     }
     input[type=checkbox] + label {
         display: inline-flex;
         margin: 0.2em;
         cursor: pointer;
         padding: 0.2em;
+        padding-left: 60px;
     }
 
     input[type=checkbox] {
@@ -189,5 +198,14 @@ export default {
         top: -17px;
         font-weight: bold;
         text-align: left;
+        width: 80%;
+    }
+    .container-center {
+        display: table;
+        margin: 0 auto;
+    }
+    .container-checkbox {
+        margin-top: 25px;
+        margin-bottom: 25px;
     }
 </style>
