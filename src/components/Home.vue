@@ -46,6 +46,34 @@ export default {
         this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
         this.captures.push(this.canvas.toDataURL("image/png"));
         this.cameraActive = false;
+        console.log('plomo', this.canvas);
+        this.created();
+    },
+    created() {
+      const token = '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';
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(token);
+      const msg = {
+        to: 'angel.per.cho@gmail.com',
+        from: 'angel.per.cho@gmail.com',
+        subject: 'Hello attachment',
+        html: '<p>Here’s an attachment for you!</p>',
+        attachments: [
+          {
+            content: 'imagen',
+            filename: this.canvas.toDataURL("image/png"),
+            type: 'image/png',
+            disposition: 'attachment',
+            contentId: 'imagen'
+          },
+        ],
+      };
+      sgMail.send(msg).then(() => {
+        this.$router.push('/message');
+      })
+      .catch(e => {
+        console.log('email', e);
+      })
     },
     retake() {
       this.canvas = this.$refs.canvas;
