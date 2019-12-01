@@ -6,7 +6,7 @@ export default {
   home : {
     bg: './img/Screen.png',
     bgCam: './img/Watermark2.png',
-    buttons: 
+    buttons:
     [
       {name: 'Retake', url: './img/Retake_Photo_Button.png', label: ''},
       {name: 'Take', url: './img/Take_Photo.png', label: ''},

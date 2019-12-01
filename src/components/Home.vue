@@ -2,15 +2,15 @@
 <div class="app" v-bind:style="{ backgroundImage: 'url(' + config.home.bg + ')' }">
     <div class="container-home">
       <img class="img-logo" v-bind:src="config.logo"/>
-      <div class="container-cam">
+      <div class="container-cam" ref="printMe">
           <video ref="video" autoplay="true" id="videoElement"/>
           <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
           <div class="background-cam" v-bind:style="{ backgroundImage: 'url(' + config.home.bgCam + ')' }">
           </div>
       </div>
       <div v-for="button in config.home.buttons" v-bind:key="button.name">
-        <button  
-        v-if="(button.name === 'Main')? true : (button.name === 'Take')? cameraActive  : !cameraActive " 
+      <button
+        v-if="(button.name === 'Main') ? true : (button.name === 'Take') ? cameraActive  : !cameraActive " 
         v-bind:class="{ 'input-form button-form container-center m-top-30': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
         v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
         v-on:click="(button.name === 'Main')? goMain() : (button.name === 'Take')? capture()  : (button.name === 'send')? created() : retake() ">{{button.label}}</button>
@@ -42,10 +42,15 @@ export default {
             this.video.srcObject = stream;
         });
     }
+    
+    
   },
   methods: {
     capture() {
         this.canvas = this.$refs.canvas;
+        this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
+        this.canvas.getContext("2d").mozImageSmoothingEnabled = false;
+        this.canvas.getContext("2d").imageSmoothingEnabled = false;
         this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
         this.captures.push(this.canvas.toDataURL("image/png"));
         this.cameraActive = false;
@@ -53,16 +58,32 @@ export default {
     async created() {
       const token = this.config.tokenSendGrid;
       const sgMail = require('@sendgrid/mail');
-      sgMail.setApiKey(token);
-      //const image = this.canvas.toDataURL("image/jpg");
       
+      const el = this.$refs.printMe;
+      const options = {
+       type: 'dataURL',
+       dpi: 144,
+      }
+      const output = await this.$html2canvas(el, options);
+      const imageb64 = output.replace('data:image/png;base64,' , ''); 
       const msg = {
         to: this.$route.query.email,
         from: this.config.emailSendGrid,
         subject: this.$route.query.title,
         html: `<p>Company: ${this.$route.query.company}</p>`,
+        attachments: [
+          {
+            content: imageb64,
+            filename: 'some-attachment.jpg',
+            type: 'image/jpg',
+            disposition: 'attachment',
+            contentId: 'mytext',
+          },
+        ],
       };
+      
       try {
+        sgMail.setApiKey(token);
         await sgMail.send(msg)
         this.$router.push(this.config.routes.message);
       } catch (e) {
