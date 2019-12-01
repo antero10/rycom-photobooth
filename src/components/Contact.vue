@@ -1,27 +1,31 @@
 <template>
-    <div>  
+    <div class="container-contact">  
         <div class="container-form">
         <div class="container-form container-form-inputs">
-            <img class="img-robot" src="../assets/robot.png" />
+            <img class="img-robot" v-bind:src="config.contact.robot" />
             <div class="container-text-form">
-                <p> Fill out the form below and take a picture with me.</p>
+                <p> {{config.contact.text}}</p>
             </div>
         </div>
         <div class="container-form container-form-inputs">
-            <input class="input-form" id="Full_Name" :value="inputs['Full_Name']" @focus="onInputFocus" @input="onInputChange" placeholder="Full Name" />    
-            <input class="input-form" id="Company" :value="inputs['Company']" @focus="onInputFocus" @input="onInputChange" placeholder="Company" />    
-            <input class="input-form" id="Title" :value="inputs['Title']" @focus="onInputFocus" @input="onInputChange" placeholder="Title" />    
-            <input class="input-form" id="E_mail" :value="inputs['E_mail']" @focus="onInputFocus" @input="onInputChange" placeholder="E-mail" />
+            <input autocomplete="off" class="input-form" id="fullName" :value="inputs['fullName']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.fullName" />    
+            <input autocomplete="off" class="input-form" id="company" :value="inputs['company']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.company" />    
+            <input autocomplete="off" class="input-form" id="title" :value="inputs['title']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.title" />    
+            <input autocomplete="off" class="input-form" id="email" :value="inputs['email']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.email" />
             <div class="container-checkbox">
                 <input type="checkbox" id="check" v-model='check' name="check" value="check">
                 <label for="check"></label>
-                <span class="text-checkBox">Consent* <br>I agree to receive email messages from RYCOM Corporation</span>
+                <span class="text-checkBox">{{config.contact.checkConsent}} <br>{{config.contact.checkText}}</span>
             </div>
             <br>
-            <button class="input-form button-form container-center" :disabled='!isComplete' v-on:click="camera()">Next</button>
         </div>
     </div>
-    <button class="btn-return container-center" v-on:click="backToPage()"></button>
+    <div v-for="button in config.contact.buttons" v-bind:key="button.name">
+        <button :disabled="(button.name === 'Next')? !isComplete : false"
+        v-bind:class="{ 'input-form button-form container-center': (button.name === 'Next'), 'btn container-center': (button.name === 'Main') }" 
+        v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
+        v-on:click="(button.name === 'Next')? camera() : backToPage()">{{button.label}}</button>
+    </div>
     <SimpleKeyboard
       @onChange="onChange"
       :input="inputs[inputName]"
@@ -31,6 +35,7 @@
 
 <script>
 import SimpleKeyboard from "./SimpleKeyboard";
+import Config from './configs/config';
 export default {
   name: 'Contact',
   components: {
@@ -38,25 +43,30 @@ export default {
   },
   data: () => ({
     inputs: {
-      Full_Name: "",
-      Company: "",
-      Title: "",
-      E_mail: "",
+      fullName: "",
+      company: "",
+      title: "",
+      email: "",
     },
     check: false,
-    inputName: "Full_Name"
+    inputName: "fullName",
+    config: Config
   }),
   props: {
     msg: String
   },
   computed: {
     isComplete () {
-      return this.inputs['Full_Name'] && this.inputs['Company'] && this.inputs['Title'] && this.inputs['E_mail'] && this.check;
+      return this.inputs['fullName'] && this.inputs['company'] && this.inputs['title'] && this.inputs['email'] && this.check;
     }
   },
   methods: {
     camera() {
-      this.$router.push('/home');
+      this.$router.push(
+        {
+        path: this.config.routes.home, 
+        query: this.inputs
+        });
     },
     onChange(input) {
       this.inputs[this.inputName] = input;
@@ -68,7 +78,7 @@ export default {
       this.inputName = input.target.id;
     },
     backToPage() {
-      window.location.href = 'http://bm3sk.bm3group.com';
+      window.location.href = this.config.linkBm3group;
     }
   }
 }
@@ -83,8 +93,14 @@ export default {
     .simple-keyboard {
         max-width: 950px;
     }
-    .btn-return {
-        background-image: url(../assets/Main_Menu_Button.png);
+    .container-contact {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 45%;
+        width: 74%;
+    }
+    .btn {
         width: 213px;
         height: 70px;
         background-size: 100%;
@@ -94,14 +110,17 @@ export default {
         border: none;
         background-color: transparent;
     }
-    .btn-return:focus {
+    .input-form:focus {
+        outline: 2px solid #0000ff6b;
+    }
+    .btn:focus {
         outline: none;
     }
-    .btn-return:focus {
+    .btn:focus {
         outline: none;
     }
     .container-form {
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
     }
     .container-form-inputs {
@@ -120,7 +139,7 @@ export default {
         color: #6c6d71;
     }
     .input-form {
-        background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%);
+        background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%) !important;
         border-radius: 38px;
         color: white;
         text-align: center;
@@ -166,9 +185,9 @@ export default {
         display: inline-block;
         width: 1.5em;
         height: 1.5em;
-        padding-left: 0.2em;
+        padding-left: 0.4em;
         padding-bottom: 0.3em;
-        margin-right: 0.2em;
+        margin-right: 0em;
         vertical-align: bottom;
         color: transparent;
         -webkit-transition: .2s;
@@ -198,7 +217,7 @@ export default {
         top: -17px;
         font-weight: bold;
         text-align: left;
-        width: 80%;
+        width: 500px;
     }
     .container-center {
         display: table;

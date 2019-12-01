@@ -1,24 +1,26 @@
 <template>
-<div class="app">
-    <div class="hello">
-      <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
+<div class="app" v-bind:style="{ backgroundImage: 'url(' + config.home.bg + ')' }">
+    <div class="container-home">
+      <img class="img-logo" v-bind:src="config.logo"/>
       <div class="container-cam">
           <video ref="video" autoplay="true" id="videoElement"/>
           <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
-          <div class="background-cam">
-            
+          <div class="background-cam" v-bind:style="{ backgroundImage: 'url(' + config.home.bgCam + ')' }">
           </div>
       </div>
-      
-      <button v-if="cameraActive" class="btn-return btn-img3 m-top-30" v-on:click="capture()"></button> <br>
-      <button v-if="!cameraActive" class="btn-return btn-img2" v-on:click="retake()"></button> <br>
-      <button class="btn-return btn-img1" v-on:click="goMain()"></button> <br>
-      <!--<button class="input-form button-form">text</button>-->
+      <div v-for="button in config.home.buttons" v-bind:key="button.name">
+        <button  
+        v-if="(button.name === 'Main')? true : (button.name === 'Take')? cameraActive  : !cameraActive " 
+        v-bind:class="{ 'input-form button-form container-center m-top-30': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
+        v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
+        v-on:click="(button.name === 'Main')? goMain() : (button.name === 'Take')? capture()  : (button.name === 'send')? created() : retake() ">{{button.label}}</button>
+      </div>
     </div>
 </div>
 </template>
 
 <script>
+import Config from './configs/config';
 export default {
   name: 'home',
   props: {
@@ -29,7 +31,8 @@ export default {
         video: {},
         canvas: {},
         cameraActive: true,
-        captures: []
+        captures: [],
+        config: Config
     }
   },
   mounted() {
@@ -47,13 +50,32 @@ export default {
         this.captures.push(this.canvas.toDataURL("image/png"));
         this.cameraActive = false;
     },
+    async created() {
+      const token = this.config.tokenSendGrid;
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(token);
+      //const image = this.canvas.toDataURL("image/jpg");
+      
+      const msg = {
+        to: this.$route.query.email,
+        from: this.config.emailSendGrid,
+        subject: this.$route.query.title,
+        html: `<p>Company: ${this.$route.query.company}</p>`,
+      };
+      try {
+        await sgMail.send(msg)
+        this.$router.push(this.config.routes.message);
+      } catch (e) {
+        console.log(e);
+      }
+    },
     retake() {
       this.canvas = this.$refs.canvas;
       this.canvas.getContext("2d").clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.cameraActive = true;
     },
     goMain() {
-      this.$router.push('/message');
+      this.$router.push(this.config.routes.contact);
     }
   }
 }
@@ -61,10 +83,44 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .app {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: block;
+      position: fixed;
+    }
+    .input-form {
+      background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%) !important;
+      border-radius: 38px;
+      color: white;
+      text-align: center;
+      width: 100%;
+      height: 75px;
+      border: none;
+      margin: 6px 0px;
+      font-size: 24px;
+    }
+    .input-form::placeholder {
+        color: white;
+    }
+    .button-form {
+      width: 200px;
+      box-shadow: 4px 3px 8px 0 #000000c7;
+      height: 56px;
+      font-weight: bold;
+    }
+    .container-home {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 40%;
+    }
     video#videoElement {
       position: absolute;
       top: 25px;
-      left: 8px;
+      left: 7px;
       width: 798px;
       height: 549px;
       z-index: 0;
@@ -78,20 +134,20 @@ export default {
       z-index: 0;
     }
     .img-logo {
-      width: 20%;
+      width: 200px;
       margin: 0 auto;
       margin-bottom: 50px;
+      filter: brightness(0) invert(1);
     }
     .container-cam {
       background-color: black;
-      width: 1039px;
+      width: 969px;
       height: 585px;
       margin: 0 auto;
       box-shadow: 0 0 7px 0 #676767;
       position: relative;
     }
     .background-cam {
-      background-image: url(../assets/Watermark2.png);
       width: 100%;
       height: 100%;
       z-index: 1;
@@ -99,8 +155,7 @@ export default {
       background-repeat: no-repeat;
       position: relative;
     }
-    .btn-return {
-        background-image: url(../assets/Main_Menu_Button.png);
+    .btn {
         width: 213px;
         height: 70px;
         background-size: 100%;
@@ -110,42 +165,13 @@ export default {
         border: none;
         background-color: transparent;
     }
-    .btn-return:focus {
+    .btn:focus {
         outline: none;
     }
     .m-top-30 {
       margin-top: 30px;
     }
-    .btn-img1 {
-      background-image: url(../assets/Main_Menu_Button.png) !important;
-    }
-    .btn-img2 {
-      background-image: url(../assets/Retake_Photo_Button.png) !important;
-    }
-    .btn-img3 {
-      background-image: url(../assets/Take_Photo.png) !important;
-    }
-    .btn-return:focus {
+    .btn:focus {
       outline: none;
-    }
-    .input-form {
-        background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%);
-        border-radius: 38px;
-        color: white;
-        text-align: center;
-        width: 100%;
-        height: 75px;
-        border: none;
-        margin: 6px 0px;
-        font-size: 24px;
-    }
-    .input-form::placeholder {
-        color: white;
-    }
-    .button-form {
-        width: 35%;
-        box-shadow: 1px 1px 4px 0 #000000c7;
-        margin-top: -22px;
-        margin-bottom: 0;
     }
 </style>

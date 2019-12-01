@@ -1,28 +1,34 @@
 <template>
 <div class="app">
   <div class="app">
-      <div class="hello">
-        <img class="img-logo" src="../assets/Orange_Rycom_Logo.png"/>
+      <div class="container-msg">
+        <img class="img-logo" v-bind:src="config.logo"/>
         <div>
             <div class="check-icon"></div>
-            <p class="color-grey">YOU PICTURE HAS BEEN SENT TO YOUR EMAIL!</p>
-            <p class="color-orange">THANK YOU FOR VISITING RYCOM´S SMART STATION</p>
+            <p class="color-grey">{{config.message.text1}}</p>
+            <p class="color-orange">{{config.message.text2}}</p>
         </div>
-        <button class="btn-return" v-on:click="goCamera()"></button>
+        <div v-for="button in config.message.buttons" v-bind:key="button.name">
+          <button class="btn"  v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" v-on:click="goCamera()"></button>
+        </div>
       </div>
   </div>
 </div>
 </template>
 
 <script>
+import Config from './configs/config';
 export default {
   name: 'message',
   props: {
     msg: String
   },
+  data: () => ({
+    config: Config
+  }),
   methods: {
     goCamera() {
-      this.$router.push('/');
+      this.$router.push(this.config.routes.contact);
     }
   }
 }
@@ -30,6 +36,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .container-msg {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     .color-grey {
         color: grey;
         font-size: 18px;
@@ -65,12 +77,11 @@ export default {
         margin: 0 auto;
     }
     .img-logo {
-        width: 20%;
+        width: 200px;
         margin: 0 auto;
         margin-bottom: 50px;
     }
-    .btn-return {
-        background-image: url(../assets/Main_Menu_Button.png);
+    .btn {
         width: 213px;
         height: 70px;
         background-size: 100%;
@@ -81,7 +92,7 @@ export default {
         background-color: transparent;
         margin-top: 35px;
     }
-    .btn-return:focus {
+    .btn:focus {
         outline: none;
     }
     .container-checkbox {
