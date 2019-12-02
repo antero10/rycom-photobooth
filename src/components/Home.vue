@@ -130,7 +130,7 @@ export default {
       position: absolute;
       left: 50%;
       transform: translate(-50%, -50%);
-      top: 50%;
+      top: 44%;
     }
     video#videoElement {
       position: absolute;
@@ -157,12 +157,13 @@ export default {
       position: relative;
     }
     .background-cam {
-      width: 100%;
+      width: calc(100% + 7px);
       height: 100%;
       z-index: 1;
-      background-size: 101% 100%;
+      background-size: 100% 100%;
       background-repeat: no-repeat;
       position: relative;
+      margin-left: -3px;
     }
     .m-top-30 {
       margin-top: 30px;

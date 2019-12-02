@@ -15,14 +15,13 @@ export default {
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     display: block;
     position: fixed;
   }
   .img-logo {
     width: 450px;
     margin: 0 auto;
-    filter: brightness(0) invert(1);
     margin-top: 100px;
   }
   .btn {
