@@ -23,7 +23,6 @@
 
 <script>
 import Config from './configs/config';
-import axios from 'axios';
 export default {
   name: 'home',
   props: {
@@ -59,7 +58,6 @@ export default {
         this.cameraActive = false;
     },
     async created() {
-      axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type';
       const token = this.config.tokenSendGrid;
       const sgMail = require('@sendgrid/mail');
       
