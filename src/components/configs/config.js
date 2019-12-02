@@ -1,6 +1,6 @@
 export default {
   logo: './img/White_Rycom_Logo.png',
-  urlApi: '',
+  urlApi: 'https://rycom-api.herokuapp.com/email',
   linkBm3group: 'http://bm3sk.bm3group.com',
   emailSendGrid: 'test@test.com',
   bg: './img/Screen.png',
