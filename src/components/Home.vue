@@ -117,7 +117,7 @@ export default {
       top: 25px;
       left: 7px;
       width: 798px;
-      height: 549px;
+      height: 560px;
       z-index: 0;
     }
     canvas#canvas {

@@ -21,10 +21,6 @@
             <br>
         </div>
     </div>
-    <SimpleKeyboard
-      @onChange="onChange"
-      :input="inputs[inputName]"
-      :inputName="inputName"/>
     </div>
     <div class="container-buttons">
         <div v-for="button in config.contact.buttons" v-bind:key="button.name">
@@ -38,13 +34,9 @@
 </template>
 
 <script>
-import SimpleKeyboard from "./SimpleKeyboard";
 import Config from './configs/config';
 export default {
   name: 'Contact',
-  components: {
-    SimpleKeyboard
-  },
   data: () => ({
     inputs: {
       fullName: "",
