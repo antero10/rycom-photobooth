@@ -115,23 +115,23 @@ export default {
     video#videoElement {
       position: absolute;
       top: 25px;
-      left: 7px;
-      width: 798px;
-      height: 549px;
+      left: -8px;
+      width: 821px;
+      height: 563px;
       z-index: 0;
     }
     canvas#canvas {
       position: absolute;
       top: 25px;
-      left: 40px;
-      width: 728px;
-      height: 549px;
+      left: 32px;
+      width: 742px;
+      height: 560px;
       z-index: 0;
     }
     .container-cam {
       background-color: transparent;
       width: 796px;
-      height: 585px;
+      height: 590px;
       margin: 0 auto;
       box-shadow: 0 0 7px 0 #676767;
       position: relative;
