@@ -129,8 +129,8 @@ export default {
       z-index: 0;
     }
     .container-cam {
-      background-color: black;
-      width: 969px;
+      background-color: transparent;
+      width: 796px;
       height: 585px;
       margin: 0 auto;
       box-shadow: 0 0 7px 0 #676767;
