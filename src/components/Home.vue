@@ -83,7 +83,7 @@ export default {
       };
       
       try {
-        await axios.post(this.config.urlEmail, msg)
+        await axios.post(this.config.urlApi, msg)
         this.$router.push(this.config.routes.message);
       } catch (e) {
         console.log(e);
