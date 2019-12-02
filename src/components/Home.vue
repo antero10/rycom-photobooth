@@ -13,7 +13,7 @@
       <div v-for="button in config.home.buttons" v-bind:key="button.name">
         <button
       v-if="(button.name === 'Main') ? true : (button.name === 'Take') ? cameraActive  : !cameraActive " 
-      v-bind:class="{ 'input-form button-form container-center m-top-30': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
+      v-bind:class="{ 'input-form button-form container-center m-top-34': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
       v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
       v-on:click="(button.name === 'Main')? goMain() : (button.name === 'Take')? capture()  : (button.name === 'send')? created() : retake() ">{{button.label}}</button>
     </div>
@@ -106,25 +106,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .input-form {
-      background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%) !important;
-      border-radius: 38px;
-      color: white;
-      text-align: center;
-      width: 100%;
-      height: 75px;
-      border: none;
-      margin: 6px 0px;
-      font-size: 24px;
-    }
-    .input-form::placeholder {
-      color: white;
-    }
-    .button-form {
-      width: 200px;
-      box-shadow: 4px 3px 8px 0 #000000c7;
-      height: 56px;
-      font-weight: bold;
+    .m-top-34 {
+      margin-top: 34px !important;
     }
     .container-home {
       position: absolute;
