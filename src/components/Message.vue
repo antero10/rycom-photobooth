@@ -1,17 +1,17 @@
 <template>
-<div class="app">
-  <div class="app">
-      <div class="container-msg">
-        <img class="img-logo" v-bind:src="config.logo"/>
-        <div>
-            <div class="check-icon"></div>
-            <p class="color-grey">{{config.message.text1}}</p>
-            <p class="color-orange">{{config.message.text2}}</p>
-        </div>
-        <div v-for="button in config.message.buttons" v-bind:key="button.name">
-          <button class="btn"  v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" v-on:click="goCamera()"></button>
-        </div>
-      </div>
+<div class="app" v-bind:style="{ backgroundImage: 'url(' + config.bg + ')' }">
+  <img class="img-logo" v-bind:src="config.logo"/>
+  <div class="container-msg">
+    <div>
+        <div class="check-icon"></div>
+        <p class="color-grey">{{config.message.text1}}</p>
+        <p class="color-orange">{{config.message.text2}}</p>
+    </div>
+  </div>
+  <div class="container-buttons">
+    <div v-for="button in config.message.buttons" v-bind:key="button.name">
+      <button class="btn"  v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" v-on:click="goCamera()"></button>
+    </div>
   </div>
 </div>
 </template>
@@ -43,8 +43,8 @@ export default {
       transform: translate(-50%, -50%);
     }
     .color-grey {
-        color: grey;
-        font-size: 18px;
+        color: white;
+        font-size: 23px;
         font-weight: bold;
         margin-bottom: 60px;
     }
@@ -70,30 +70,11 @@ export default {
         margin: 0 auto;
     }
     .color-orange {
-        color: #e24c32;
-        font-size: 33px;
+        color: white;
+        font-size: 40px;
         font-weight: bold;
         width: 500px;
         margin: 0 auto;
-    }
-    .img-logo {
-        width: 200px;
-        margin: 0 auto;
-        margin-bottom: 50px;
-    }
-    .btn {
-        width: 213px;
-        height: 70px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-        margin-top: 35px;
-    }
-    .btn:focus {
-        outline: none;
     }
     .container-checkbox {
       margin-top: 25px;

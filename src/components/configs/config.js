@@ -1,11 +1,11 @@
 export default {
-  logo: './img/Orange_Rycom_Logo.png',
+  logo: './img/White_Rycom_Logo.png',
   tokenSendGrid: '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',
   linkBm3group: 'http://bm3sk.bm3group.com',
   emailSendGrid: 'test@test.com',
+  bg: './img/Screen.png',
   home : {
-    bg: './img/Screen.png',
-    bgCam: './img/Watermark2.png',
+    bgCam: './img/Watermark.png',
     buttons:
     [
       {name: 'Retake', url: './img/Retake_Photo_Button.png', label: ''},
@@ -25,7 +25,7 @@ export default {
     checkText: 'I agree to receive email messages from RYCOM Corporation',
     checkConsent: 'Consent*',
     text: 'Fill out the form below and take a picture with me.',
-    robot: './img/robot.png',
+    robot: './img/Big_Robot.png',
     buttons: [
       {name: 'Next', url: '', label: 'Next'},
       {name: 'Main', url: './img/Main_Menu_Button.png', label: ''},
