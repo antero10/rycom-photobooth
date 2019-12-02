@@ -1,21 +1,23 @@
 <template>
-<div class="app" v-bind:style="{ backgroundImage: 'url(' + config.home.bg + ')' }">
-    <div class="container-home">
-      <img class="img-logo" v-bind:src="config.logo"/>
+<div class="app" v-bind:style="{ backgroundImage: 'url(' + config.bg + ')' }">
+  <img class="img-logo" v-bind:src="config.logo"/>
+  <div class="container-home">
       <div class="container-cam" ref="printMe">
-          <video ref="video" autoplay="true" id="videoElement"/>
-          <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
-          <div class="background-cam" v-bind:style="{ backgroundImage: 'url(' + config.home.bgCam + ')' }">
-          </div>
-      </div>
-      <div v-for="button in config.home.buttons" v-bind:key="button.name">
-      <button
-        v-if="(button.name === 'Main') ? true : (button.name === 'Take') ? cameraActive  : !cameraActive " 
-        v-bind:class="{ 'input-form button-form container-center m-top-30': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
-        v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
-        v-on:click="(button.name === 'Main')? goMain() : (button.name === 'Take')? capture()  : (button.name === 'send')? created() : retake() ">{{button.label}}</button>
+        <video ref="video" autoplay="true" id="videoElement"/>
+        <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+        <div class="background-cam" v-bind:style="{ backgroundImage: 'url(' + config.home.bgCam + ')' }">
+        </div>
       </div>
     </div>
+    <div class="container-buttons">
+      <div v-for="button in config.home.buttons" v-bind:key="button.name">
+        <button
+      v-if="(button.name === 'Main') ? true : (button.name === 'Take') ? cameraActive  : !cameraActive " 
+      v-bind:class="{ 'input-form button-form container-center m-top-30': (button.name === 'send'), 'btn m-top-30 container-center': (button.name !== 'send') }"  
+      v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
+      v-on:click="(button.name === 'Main')? goMain() : (button.name === 'Take')? capture()  : (button.name === 'send')? created() : retake() ">{{button.label}}</button>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -104,14 +106,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .app {
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-size: contain;
-      display: block;
-      position: fixed;
-    }
     .input-form {
       background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%) !important;
       border-radius: 38px;
@@ -124,7 +118,7 @@ export default {
       font-size: 24px;
     }
     .input-form::placeholder {
-        color: white;
+      color: white;
     }
     .button-form {
       width: 200px;
@@ -136,7 +130,7 @@ export default {
       position: absolute;
       left: 50%;
       transform: translate(-50%, -50%);
-      top: 40%;
+      top: 50%;
     }
     video#videoElement {
       position: absolute;
@@ -154,12 +148,6 @@ export default {
       height: 549px;
       z-index: 0;
     }
-    .img-logo {
-      width: 200px;
-      margin: 0 auto;
-      margin-bottom: 50px;
-      filter: brightness(0) invert(1);
-    }
     .container-cam {
       background-color: black;
       width: 969px;
@@ -176,23 +164,7 @@ export default {
       background-repeat: no-repeat;
       position: relative;
     }
-    .btn {
-        width: 213px;
-        height: 70px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-    }
-    .btn:focus {
-        outline: none;
-    }
     .m-top-30 {
       margin-top: 30px;
-    }
-    .btn:focus {
-      outline: none;
     }
 </style>

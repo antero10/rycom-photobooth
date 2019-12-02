@@ -1,4 +1,5 @@
 <template>
+<div class="app" v-bind:style="{ backgroundImage: 'url(' + config.bg + ')' }">
     <div class="container-contact">  
         <div class="container-form">
         <div class="container-form container-form-inputs">
@@ -20,17 +21,20 @@
             <br>
         </div>
     </div>
-    <div v-for="button in config.contact.buttons" v-bind:key="button.name">
-        <button :disabled="(button.name === 'Next')? !isComplete : false"
-        v-bind:class="{ 'input-form button-form container-center': (button.name === 'Next'), 'btn container-center': (button.name === 'Main') }" 
-        v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
-        v-on:click="(button.name === 'Next')? camera() : backToPage()">{{button.label}}</button>
-    </div>
     <SimpleKeyboard
       @onChange="onChange"
       :input="inputs[inputName]"
       :inputName="inputName"/>
     </div>
+    <div class="container-buttons">
+        <div v-for="button in config.contact.buttons" v-bind:key="button.name">
+            <button :disabled="(button.name === 'Next')? !isComplete : false"
+            v-bind:class="{ 'input-form button-form container-center': (button.name === 'Next'), 'btn container-center': (button.name === 'Main') }" 
+            v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
+            v-on:click="(button.name === 'Next')? camera() : backToPage()">{{button.label}}</button>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -100,24 +104,8 @@ export default {
         top: 45%;
         width: 74%;
     }
-    .btn {
-        width: 213px;
-        height: 70px;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        margin: 0 auto;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-    }
     .input-form:focus {
         outline: 2px solid #0000ff6b;
-    }
-    .btn:focus {
-        outline: none;
-    }
-    .btn:focus {
-        outline: none;
     }
     .container-form {
         width: 100%;
@@ -133,31 +121,33 @@ export default {
     }
     .container-text-form p {
         font-size: 59px;
-        font-weight: bold;
+        font-weight: 900;
         text-align: left;
         padding-left: 30px;
-        color: #6c6d71;
+        color: white;
     }
     .input-form {
         background: linear-gradient(to right, rgba(226,72,49,1) 0%, rgba(233,117,55,1) 42%, rgba(233,117,55,1) 58%, rgba(226,72,49,1) 100%) !important;
-        border-radius: 38px;
+        border-radius: 47px;
         color: white;
         text-align: center;
         width: 100%;
         height: 75px;
         border: none;
-        margin: 6px 0px;
+        margin: 10px 0px;
         font-size: 24px;
+        box-shadow: 4px 3px 8px 0 #000000c7;
     }
     .input-form::placeholder {
         color: white;
     }
     .button-form {
-        width: 200px;
-        box-shadow: 4px 3px 8px 0 #000000c7;
+        width: 333px;
         margin-top: -22px !important;
         margin-bottom: 10px !important;
-        height: 62px;
+        height: 94px;
+        font-size: 30px;
+        font-weight: 600;
     }
     .img-robot {
         float: left;
@@ -212,12 +202,13 @@ export default {
     }
     .text-checkBox {
         display: inline-flex;
-        font-size: 19px;
+        font-size: 17px;
         position: relative;
         top: -17px;
         font-weight: bold;
         text-align: left;
         width: 500px;
+        color: white;
     }
     .container-center {
         display: table;
