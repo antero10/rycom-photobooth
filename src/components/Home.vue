@@ -23,6 +23,7 @@
 
 <script>
 import Config from './configs/config';
+import axios from 'axios';
 export default {
   name: 'home',
   props: {
@@ -57,10 +58,7 @@ export default {
         this.captures.push(this.canvas.toDataURL("image/png"));
         this.cameraActive = false;
     },
-    async created() {
-      const token = this.config.tokenSendGrid;
-      const sgMail = require('@sendgrid/mail');
-      
+    async created() {      
       const el = this.$refs.printMe;
       const options = {
        type: 'dataURL',
@@ -85,8 +83,7 @@ export default {
       };
       
       try {
-        sgMail.setApiKey(token);
-        await sgMail.send(msg)
+        await axios.post(this.config.urlApi, msg)
         this.$router.push(this.config.routes.message);
       } catch (e) {
         console.log(e);

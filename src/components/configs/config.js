@@ -1,6 +1,6 @@
 export default {
   logo: './img/White_Rycom_Logo.png',
-  tokenSendGrid: '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',
+  urlApi: '',
   linkBm3group: 'http://bm3sk.bm3group.com',
   emailSendGrid: 'test@test.com',
   bg: './img/Screen.png',
