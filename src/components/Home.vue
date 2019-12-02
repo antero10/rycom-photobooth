@@ -122,10 +122,10 @@ export default {
     }
     canvas#canvas {
       position: absolute;
-      top: 25px;
-      left: 32px;
-      width: 742px;
-      height: 560px;
+      top: 22px;
+      left: 27px;
+      width: 751px;
+      height: 565px;
       z-index: 0;
     }
     .container-cam {
