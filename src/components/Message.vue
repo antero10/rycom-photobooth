@@ -28,7 +28,7 @@ export default {
   }),
   methods: {
     goCamera() {
-      this.$router.push(this.config.routes.contact);
+      window.location.href = this.config.linkBm3group;
     }
   }
 }

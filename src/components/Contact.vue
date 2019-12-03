@@ -58,7 +58,11 @@ export default {
   },
   methods: {
     camera() {
-      window.location.href = this.config.linkBm3group;
+      this.$router.push(
+        {
+        path: this.config.routes.home, 
+        query: this.inputs
+        });
     },
     onChange(input) {
       this.inputs[this.inputName] = input;
