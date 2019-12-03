@@ -26,6 +26,11 @@ export default {
   data: () => ({
     config: Config
   }),
+  mounted() {
+    setTimeout(() => {
+      window.location.href = this.config.linkBm3group;
+    },this.config.waitTime);
+  },
   methods: {
     goCamera() {
       window.location.href = this.config.linkBm3group;
