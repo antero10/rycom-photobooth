@@ -3,6 +3,7 @@ export default {
   urlApi: 'https://rycom-api.herokuapp.com/email',
   linkBm3group: 'http://bm3sk.bm3group.com',
   emailSendGrid: 'test@test.com',
+  timePhoto: 3000,
   bg: './img/Screen.png',
   home : {
     bgCam: './img/Watermark.png',
