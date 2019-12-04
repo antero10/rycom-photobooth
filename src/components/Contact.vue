@@ -14,7 +14,7 @@
             <input autocomplete="off" class="input-form" id="title" :value="inputs['title']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.title" />    
             <input autocomplete="off" class="input-form" id="email" :value="inputs['email']" @focus="onInputFocus" @input="onInputChange" :placeholder="config.contact.email" />
             <div class="container-checkbox">
-                <input type="checkbox" id="check" v-model='check' name="check" value="check">
+                <input type="checkbox" id="check" name="check" value="check">
                 <label for="check"></label>
                 <span class="text-checkBox">{{config.contact.checkConsent}} <br>{{config.contact.checkText}}</span>
             </div>
@@ -24,10 +24,10 @@
     </div>
     <div class="container-buttons">
         <div v-for="button in config.contact.buttons" v-bind:key="button.name">
-            <button :disabled="(button.name === 'Next')? !isComplete : false"
+            <button
             v-bind:class="{ 'input-form button-form container-center': (button.name === 'Next'), 'btn container-center': (button.name === 'Main') }" 
             v-bind:style="{ backgroundImage: 'url(' + button.url + ')' }" 
-            v-on:click="(button.name === 'Next')? camera() : backToPage()">{{button.label}}</button>
+            v-on:click="camera()">{{button.label}}</button>
         </div>
     </div>
 </div>
@@ -56,13 +56,31 @@ export default {
       return this.inputs['fullName'] && this.inputs['company'] && this.inputs['title'] && this.inputs['email'] && this.check;
     }
   },
+  mounted() {
+    var event = new Event('input', {
+    'bubbles': true,
+    'cancelable': true
+    });
+    console.log(event);
+  },
   methods: {
     camera() {
-      this.$router.push(
-        {
-        path: this.config.routes.home, 
-        query: this.inputs
-        });
+      if (document.getElementById('check').checked) {
+        const fullName = document.getElementById('fullName').value;
+        const company = document.getElementById('company').value;
+        const title = document.getElementById('title').value;
+        const email = document.getElementById('email').value;
+        this.$router.push(
+          {
+          path: this.config.routes.home, 
+          query: {
+            fullName,
+            company,
+            title,
+            email,
+          }
+          });
+      }
     },
     onChange(input) {
       this.inputs[this.inputName] = input;
