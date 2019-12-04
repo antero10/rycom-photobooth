@@ -60,17 +60,15 @@ export default {
         if (this.number <= 0) {
           this.numberActive = false;
           this.clearSetInterval()
+          this.canvas = this.$refs.canvas;
+          this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
+          this.canvas.getContext("2d").mozImageSmoothingEnabled = false;
+          this.canvas.getContext("2d").imageSmoothingEnabled = false;
+          this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
+          this.captures.push(this.canvas.toDataURL("image/png"));
+          this.cameraActive = false;
         }
       }, this.config.waitTime);
-      setTimeout(() => {
-        this.canvas = this.$refs.canvas;
-        this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
-        this.canvas.getContext("2d").mozImageSmoothingEnabled = false;
-        this.canvas.getContext("2d").imageSmoothingEnabled = false;
-        this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
-        this.captures.push(this.canvas.toDataURL("image/png"));
-        this.cameraActive = false;
-      }, this.config.timePhoto);
     },
     clearSetInterval() {
       clearInterval(this.setInterval);
