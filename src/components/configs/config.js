@@ -4,7 +4,6 @@ export default {
   linkBm3group: 'http://bm3sk.bm3group.com',
   emailSendGrid: 'test@test.com',
   timePhoto: 4000,
-  waitTime: 1000,
   bg: './img/Screen.png',
   home : {
     bgCam: './img/Watermark.png',
