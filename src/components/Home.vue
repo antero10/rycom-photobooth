@@ -3,6 +3,7 @@
   <img class="img-logo" v-bind:src="config.logo"/>
   <div class="container-home">
       <div class="container-cam" ref="printMe">
+        <p class="count-number" v-if="numberActive">{{number}}</p>
         <video ref="video" autoplay="true" id="videoElement"/>
         <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
         <div class="background-cam" v-bind:style="{ backgroundImage: 'url(' + config.home.bgCam + ')' }">
@@ -35,7 +36,10 @@ export default {
         canvas: {},
         cameraActive: true,
         captures: [],
-        config: Config
+        config: Config,
+        number: 0,
+        numberActive: false,
+        setInterval: null
     }
   },
   mounted() {
@@ -49,6 +53,15 @@ export default {
   },
   methods: {
     capture() {
+      this.number = 0;
+      this.setInterval = setInterval(() => {
+        this.numberActive = true;
+        this.number++
+        if (this.number >= 4) {
+          this.numberActive = false;
+          this.clearSetInterval()
+        }
+      }, this.config.waitTime);
       setTimeout(() => {
         this.canvas = this.$refs.canvas;
         this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
@@ -58,6 +71,9 @@ export default {
         this.captures.push(this.canvas.toDataURL("image/png"));
         this.cameraActive = false;
       }, this.config.timePhoto);
+    },
+    clearSetInterval() {
+      clearInterval(this.setInterval);
     },
     async created() {      
       const el = this.$refs.printMe;
@@ -104,6 +120,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    p.count-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 200px;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      color: white;
+    }
     .m-top-34 {
       margin-top: 34px !important;
     }
