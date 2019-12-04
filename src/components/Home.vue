@@ -61,7 +61,7 @@ export default {
           this.numberActive = false;
           this.clearSetInterval()
         }
-      }, this.config.waitTime);
+      }, Math.round((this.config.timePhoto / 4)));
       setTimeout(() => {
         this.canvas = this.$refs.canvas;
         this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
