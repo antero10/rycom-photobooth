@@ -37,7 +37,7 @@ export default {
         cameraActive: true,
         captures: [],
         config: Config,
-        number: 0,
+        number: 4,
         numberActive: false,
         setInterval: null
     }
@@ -53,15 +53,15 @@ export default {
   },
   methods: {
     capture() {
-      this.number = 0;
+      this.number = 4;
       this.setInterval = setInterval(() => {
         this.numberActive = true;
-        this.number++
-        if (this.number >= 4) {
+        this.number--
+        if (this.number <= 0) {
           this.numberActive = false;
           this.clearSetInterval()
         }
-      }, Math.round((this.config.timePhoto / 4)));
+      }, this.config.waitTime);
       setTimeout(() => {
         this.canvas = this.$refs.canvas;
         this.canvas.getContext("2d").webkitImageSmoothingEnabled = false;
